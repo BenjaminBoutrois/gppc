@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
     <title>Geeps Poster Printing Center</title>
 </head>
 <body>
-    <p>Toast</p>
+    <p>Geeps Poster Printing Center</p>
     <form action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
