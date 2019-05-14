@@ -8,10 +8,14 @@
 </head>
 <body>
     <p>Geeps Poster Printing Center</p>
-    <form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit" />
-    </form>
+    <div class="form-container">
+        <form action="" method="post">
+        {% csrf_token %}
+        <div class="form">
+            {{ form.as_p }}
+        </div>
+        <input type="submit" value="Submit" />
+        </form>
+    </div>
 </body>
 </html>
