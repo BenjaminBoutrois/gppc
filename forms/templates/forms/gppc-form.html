@@ -7,15 +7,104 @@
     <title>Geeps Poster Printing Center</title>
 </head>
 <body>
-    <p>Geeps Poster Printing Center</p>
+    <h1>Geeps Poster Printing Center</h1>
     <div class="form-container">
         <form action="" method="post">
         {% csrf_token %}
         <div class="form">
-            {{ form.as_p }}
+            <div class="form-input">
+                <label for="name">Nom</label>
+                    {{ form.name }}
+            </div>
+            <br>
+            <div class="form-input">
+                <label for="firstname">Prénom</label>
+                    {{ form.firstname }}
+            </div>
+            <br>
+            <div class="form-input">
+                <label for="email">E-Mail</label>
+                    {{ form.email }}
+            </div>
+            <br>
+            <div class="form-input">
+                <label for="phone">Téléphone</label>
+                    {{ form.phone }}
+            </div>
+            <br>
+            <div class="form-input">
+                <label for="building">Bâtiment</label>
+                    {{ form.building }}
+            </div>
+            <br>
+            <div class="form-input">
+                <label for="office">Bureau</label>
+                    {{ form.office }}
+            </div>
+            <br>
+            <div>
+                <label for="upload">Uploadez votre fichier (PDF | PPT | PPTX)</label>
+                    {{ form.upload }}
+            </div>
+            <br>
+            <div class="form-input">
+                <label for="format">Format d'impression</label>
+                    {{ form.format }}
+            </div>
+            <br>
+            <div id="format_manual">
+                <div class="form-input">
+                    <label for="formatHeight">Hauteur <span class="multiplier">X</span> Largeur</label>
+                    <div id="format_manual_champs">
+                        <br>
+                            {{ form.formatHeight }} cm <span class="multiplier">X</span> 
+                            {{ form.formatWidth }} cm
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="form-input">
+                <label for="comments">Commentaires</label>
+                    {{ form.comments }}
+            </div>
         </div>
-        <input type="submit" value="Submit" />
+        <br>
+        <input type="submit" name="send" value="Envoyer" />
         </form>
     </div>
 </body>
+<script type="text/javascript">
+
+/*
+    Cette fonction affiche ou masque les champs
+    Hauteur et Largeur du format en fonction du format choisi
+    sur le champ "format"
+*/
+function checkFormat()
+{
+    var fSelect = document.getElementById('id_format');
+    var fValue = fSelect.options[fSelect.selectedIndex].value;
+    var divManual = document.getElementById('format_manual');
+    var fw = document.getElementById('id_formatWidth');
+    var fh = document.getElementById('id_formatHeight');
+
+    /* Si la valeur est sur autre chose que "Autre format" */
+    if(fValue != "3")
+    {
+        /* On cache les champs Hauteur et Largeur et on les vide */
+        divManual.style.display = "none";
+        fw.value = '';
+        fh.value = '';
+    }
+    else
+    {
+        divManual.style.display = "block";
+    }
+}
+
+window.onload = function()
+{
+    checkFormat();
+};
+</script>
 </html>
