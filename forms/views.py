@@ -1,21 +1,52 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .form import ContactForm
+from .choices import *
+from forms.models import ContactData
+import datetime
 
 def index(request):
     return render(request, 'forms/index.html')
 
 def test(request):
-    form = ContactForm(request.POST or None)
-    if form.is_valid():
-        # Ici nous pouvons traiter les données du formulaire
-        sujet = form.cleaned_data['sujet']
-        message = form.cleaned_data['message']
-        envoyeur = form.cleaned_data['envoyeur']
-        renvoi = form.cleaned_data['renvoi']
+    if request.POST:
+        form = ContactForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Ici nous pouvons traiter les données du formulaire
+            rName = form.cleaned_data['name']
+            rFirstname = form.cleaned_data['firstname']
+            rEmail = form.cleaned_data['email']
+            rPhone = form.cleaned_data['phone']
+            buildingDict = dict(BUILDING_CHOICES)
+            rBuilding = buildingDict[int(form.cleaned_data['building'])]
+            rOffice = form.cleaned_data['office']
+            rUpload = form.cleaned_data['upload']
+            formatDict = dict(FORMAT_CHOICES)
+            rFormat = formatDict[int(form.cleaned_data['format'])]
+            rFormatHeight = form.cleaned_data['formatHeight']
+            rFormatWidth = form.cleaned_data['formatWidth']
+            rComments = form.cleaned_data['comments']
 
-        # Nous pourrions ici envoyer l'e-mail grâce aux données
-        # que nous venons de récupérer
-        envoi = True
+            newData = ContactData(
+                name = rName,
+                firstname = rFirstname,
+                email = rEmail,
+                phone = rPhone,
+                building = rBuilding,
+                office = rOffice,
+                upload = rUpload,
+                format = rFormat,
+                formatHeight = rFormatHeight,
+                formatWidth = rFormatWidth,
+                comments = rComments
+            )
+            
+            newData.save()
+
+            # Nous pourrions ici envoyer l'e-mail grâce aux données
+            # que nous venons de récupérer
+            envoi = True
+    else:
+        form = ContactForm()
 
     return render(request, 'forms/gppc-form.html', locals())

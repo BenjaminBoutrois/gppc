@@ -10,46 +10,54 @@
 <body>
     <h1>Geeps Poster Printing Center</h1>
     <div class="form-container">
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form">
             <div class="form-input">
                 <label for="name">Nom</label>
+                    {{ form.name.errors }}
                     {{ form.name }}
             </div>
             <br>
             <div class="form-input">
                 <label for="firstname">Prénom</label>
+                    {{ form.firstname.errors }}
                     {{ form.firstname }}
             </div>
             <br>
             <div class="form-input">
                 <label for="email">E-Mail</label>
+                    {{ form.email.errors }}
                     {{ form.email }}
             </div>
             <br>
             <div class="form-input">
                 <label for="phone">Téléphone</label>
+                    {{ form.phone.errors }}
                     {{ form.phone }}
             </div>
             <br>
             <div class="form-input">
                 <label for="building">Bâtiment</label>
+                    {{ form.building.errors }}
                     {{ form.building }}
             </div>
             <br>
             <div class="form-input">
                 <label for="office">Bureau</label>
+                    {{ form.office.errors }}
                     {{ form.office }}
             </div>
             <br>
             <div>
                 <label for="upload">Uploadez votre fichier (PDF | PPT | PPTX)</label>
+                    {{ form.upload.errors }}
                     {{ form.upload }}
             </div>
             <br>
             <div class="form-input">
                 <label for="format">Format d'impression</label>
+                    {{ form.format.errors }}
                     {{ form.format }}
             </div>
             <br>
@@ -58,6 +66,8 @@
                     <label for="formatHeight">Hauteur <span class="multiplier">X</span> Largeur</label>
                     <div id="format_manual_champs">
                         <br>
+                            {{ form.formatHeight.errors }}
+                            {{ form.formatWidth.errors }}
                             {{ form.formatHeight }} cm <span class="multiplier">X</span> 
                             {{ form.formatWidth }} cm
                     </div>
@@ -66,6 +76,7 @@
             <br>
             <div class="form-input">
                 <label for="comments">Commentaires</label>
+                    {{ form.comments.errors }}
                     {{ form.comments }}
             </div>
         </div>

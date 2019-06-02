@@ -1,2 +1,6 @@
 forms/__pycache__/
 gppc/__pycache__/
+forms/migrations/__pycache__/
+*.pdf
+*.ppt
+*.pptx
