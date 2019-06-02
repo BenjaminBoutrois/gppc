@@ -3,6 +3,8 @@ import datetime
 from django.utils.dateformat import format
 from django.conf import settings
 
+import os
+
 # Create your models here.
 class ContactData(models.Model):
     name = models.CharField(max_length = 100)
@@ -21,3 +23,8 @@ class ContactData(models.Model):
     def __str__(self):
         todayDate = format(self.date, settings.DATE_INPUT_FORMATS)
         return self.name + "-" + self.firstname + "-" + todayDate
+
+def content_file_name(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = "%s_%s.%s" % (instance.user.id, instance.questid.id, ext)
+    return os.path.join('uploads', filename)
