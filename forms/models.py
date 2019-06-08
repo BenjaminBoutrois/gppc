@@ -2,8 +2,23 @@ from django.db import models
 import datetime
 from django.utils.dateformat import format
 from django.conf import settings
+import re
+import unidecode
 
 import os
+
+def content_file_name(instance, filename):
+    ext = filename.split('.')[-1]
+
+    temp = filename.replace('.' + ext, '')
+
+    if not re.match('^[a-zA-Z0-9-]+$', temp):
+        unaccented_string = unidecode.unidecode(temp)
+        temp = re.sub('(?![a-zA-Z0-9-]).', '-', unaccented_string)
+    
+    filename = temp + '.' + ext
+
+    return os.path.join('uploads/', filename)
 
 # Create your models here.
 class ContactData(models.Model):
@@ -14,7 +29,7 @@ class ContactData(models.Model):
     phone = models.CharField(max_length = 100)
     building = models.CharField(max_length = 100)
     office = models.CharField(max_length = 100)
-    upload = models.FileField()
+    upload = models.FileField(upload_to=content_file_name)
     format = models.CharField(max_length = 100)
     formatHeight = models.FloatField(null=True)
     formatWidth = models.FloatField(null=True)
@@ -24,7 +39,3 @@ class ContactData(models.Model):
         todayDate = format(self.date, "d-m-Y")
         return self.name + "-" + self.firstname + "-" + todayDate
 
-def content_file_name(instance, filename):
-    ext = filename.split('.')[-1]
-    filename = "%s_%s.%s" % (instance.user.id, instance.questid.id, ext)
-    return os.path.join('uploads', filename)

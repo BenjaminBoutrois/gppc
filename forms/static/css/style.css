@@ -65,6 +65,10 @@ body {
     padding: 5%;
 }
 
+#table-history td {
+    font-size: small;
+}
+
 .lien-retour {
     font-size: x-large;
     letter-spacing: 0.5 px;

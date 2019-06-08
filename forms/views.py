@@ -6,6 +6,7 @@ from django.utils.dateformat import format
 from forms.models import ContactData
 import datetime
 from django.conf import settings
+import string
 
 def index(request):
     return render(request, 'forms/index.html')
