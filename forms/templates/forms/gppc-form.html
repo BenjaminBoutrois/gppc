@@ -9,24 +9,24 @@
 </head>
 <body>
     <h1>Geeps Poster Printing Center</h1>
-    <a class="lien-retour" href="{% url 'index' %}">< Retour</a>
+    <a class="lien-retour" href="{% url 'index' %}">< Back</a>
     <div class="form-container">
         <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form">
             <div class="form-input">
-                <label for="date">Date de demande (jj-mm-yyyy)</label>
+                <label for="date">Date of request (yyyy-mm-dd)</label>
                     {{ form.date.errors }}
                     {{ form.date }}
             </div>
             <div class="form-input">
-                <label for="name">Nom</label>
+                <label for="name">Lastname</label>
                     {{ form.name.errors }}
                     {{ form.name }}
             </div>
             <br>
             <div class="form-input">
-                <label for="firstname">Prénom</label>
+                <label for="firstname">Firstname</label>
                     {{ form.firstname.errors }}
                     {{ form.firstname }}
             </div>
@@ -38,38 +38,44 @@
             </div>
             <br>
             <div class="form-input">
-                <label for="phone">Téléphone</label>
+                <label for="phone">Phone</label>
                     {{ form.phone.errors }}
                     {{ form.phone }}
             </div>
             <br>
             <div class="form-input">
-                <label for="building">Bâtiment</label>
+                <label for="building">Building</label>
                     {{ form.building.errors }}
                     {{ form.building }}
             </div>
             <br>
             <div class="form-input">
-                <label for="office">Bureau</label>
+                <label for="office">Office</label>
                     {{ form.office.errors }}
                     {{ form.office }}
             </div>
             <br>
+            <div class="form-input">
+                <label for="delivery">Minimum delivery date</label>
+                    {{ form.delivery.errors }}
+                    {{ form.delivery }}
+            </div>
+            <br>
             <div>
-                <label for="upload">Uploadez votre fichier (PDF | PPT | PPTX)</label>
+                <label for="upload">Upload your file (PDF | PPT | PPTX)</label>
                     {{ form.upload.errors }}
                     {{ form.upload }}
             </div>
             <br>
             <div class="form-input">
-                <label for="format">Format d'impression</label>
+                <label for="format">Printing format</label>
                     {{ form.format.errors }}
                     {{ form.format }}
             </div>
             <br>
             <div id="format_manual">
                 <div class="form-input">
-                    <label for="formatHeight">Hauteur <span class="multiplier">X</span> Largeur</label>
+                    <label for="formatHeight">Height <span class="multiplier">X</span> Width</label>
                     <div id="format_manual_champs">
                         <br>
                             {{ form.formatHeight.errors }}
@@ -81,13 +87,13 @@
             </div>
             <br>
             <div class="form-input">
-                <label for="comments">Commentaires</label>
+                <label for="comments">Comment</label>
                     {{ form.comments.errors }}
                     {{ form.comments }}
             </div>
         </div>
         <br>
-        <input type="submit" name="send" value="Envoyer" />
+        <input type="submit" name="send" value="Send" />
         </form>
     </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

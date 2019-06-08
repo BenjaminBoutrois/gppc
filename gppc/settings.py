@@ -105,9 +105,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-DATE_FORMAT = 'd/m/Y'
+DATE_FORMAT = 'Y-m-d'
 
-DATE_INPUT_FORMATS = ['%d-%m-%Y']
+DATE_INPUT_FORMATS = ['%Y-%m-%d']
 
 LANGUAGE_CODE = 'en-us'
 

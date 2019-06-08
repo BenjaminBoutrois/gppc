@@ -24,6 +24,7 @@ def gppc(request):
             buildingDict = dict(BUILDING_CHOICES)
             rBuilding = buildingDict[int(form.cleaned_data['building'])]
             rOffice = form.cleaned_data['office']
+            rDelivery = form.cleaned_data['delivery']
             rUpload = form.cleaned_data['upload']
             formatDict = dict(FORMAT_CHOICES)
             rFormat = formatDict[int(form.cleaned_data['format'])]
@@ -39,7 +40,9 @@ def gppc(request):
                 phone = rPhone,
                 building = rBuilding,
                 office = rOffice,
+                delivery = rDelivery,
                 upload = rUpload,
+                filename = None,
                 format = rFormat,
                 formatHeight = rFormatHeight,
                 formatWidth = rFormatWidth,
