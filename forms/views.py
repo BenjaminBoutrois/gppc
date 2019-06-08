@@ -2,17 +2,20 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .form import ContactForm
 from .choices import *
+from django.utils.dateformat import format
 from forms.models import ContactData
 import datetime
+from django.conf import settings
 
 def index(request):
     return render(request, 'forms/index.html')
 
-def test(request):
+def gppc(request):
     if request.POST:
         form = ContactForm(request.POST, request.FILES)
         if form.is_valid():
             # Ici nous pouvons traiter les données du formulaire
+            rDate = form.cleaned_data['date']
             rName = form.cleaned_data['name']
             rFirstname = form.cleaned_data['firstname']
             rEmail = form.cleaned_data['email']
@@ -28,6 +31,7 @@ def test(request):
             rComments = form.cleaned_data['comments']
 
             newData = ContactData(
+                date = rDate,
                 name = rName,
                 firstname = rFirstname,
                 email = rEmail,
@@ -50,3 +54,7 @@ def test(request):
         form = ContactForm()
 
     return render(request, 'forms/gppc-form.html', locals())
+
+def history_gppc(request):
+    demands = list(ContactData.objects.all())
+    return render(request, 'forms/gppc-history.html', {'demands': demands})

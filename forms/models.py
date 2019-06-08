@@ -7,6 +7,7 @@ import os
 
 # Create your models here.
 class ContactData(models.Model):
+    date = models.DateField()
     name = models.CharField(max_length = 100)
     firstname = models.CharField(max_length = 100)
     email = models.EmailField()
@@ -18,10 +19,9 @@ class ContactData(models.Model):
     formatHeight = models.FloatField(null=True)
     formatWidth = models.FloatField(null=True)
     comments = models.CharField(max_length = 1000)
-    date = models.DateField(default = datetime.date.today)
     # Définition de la représentation de l'objet dans l'interface admin de django
     def __str__(self):
-        todayDate = format(self.date, settings.DATE_INPUT_FORMATS)
+        todayDate = format(self.date, "d-m-Y")
         return self.name + "-" + self.firstname + "-" + todayDate
 
 def content_file_name(instance, filename):

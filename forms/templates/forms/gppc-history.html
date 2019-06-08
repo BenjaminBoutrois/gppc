@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSXgi164MCGG3u5RKXaBGVBabmxQTVRAAVE5tDTHR26vu4IHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <title>Historique GPPC</title>
+</head>
+<body>
+    <h1>Historique du GPPC</h1>
+<script>
+$(document).ready(function () {
+    $('#table-history').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+        }
+    });
+});
+</script>
+<div class="table-container">
+    <table id="table-history">
+        <thead>
+            <tr>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Demandeur
+                </th>
+                <th>
+                    E-Mail
+                </th>
+                <th>
+                    Téléphone
+                </th>
+                <th>
+                    Bâtiment
+                </th>
+                <th>
+                    Fichier
+                </th>
+                <th>
+                    Format
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for demand in demands %}
+            <tr>
+                <td>
+                    {{ demand.date }}
+                </td>
+                <td>
+                    {{ demand.name }}&nbsp;{{ demand.firstname }}
+                </td>
+                <td>
+                    {{ demand.email }}
+                </td>
+                <td>
+                    {{ demand.phone }}
+                </td>
+                <td>
+                    {{ demand.building }}
+                </td>
+                <td>
+                    <span class="truncatable">{{ demand.upload }}</span>
+                </td>
+                <td>
+                    {% if demand.format == "Autre format" %}
+                        Autre : {{ demand.formatHeight }} x {{ demand.formatWidth }} cm
+                    {% else %}
+                        {{ demand.format }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot></tfoot>
+    </table>
+</div>
+<script type="text/javascript">
+var truncate = function (fullStr, strLen, separator) {
+    if (fullStr.length <= strLen) return fullStr;
+    
+    separator = separator || '...';
+    
+    var sepLen = separator.length,
+        charsToShow = strLen - sepLen,
+        frontChars = Math.ceil(charsToShow/2),
+        backChars = Math.floor(charsToShow/2);
+    
+    return fullStr.substr(0, frontChars) + 
+           separator + 
+           fullStr.substr(fullStr.length - backChars);
+};
+
+var truncatable = document.getElementsByClassName('truncatable');
+console.log(truncatable);
+
+for(var i = 0; i <= truncatable.length -1; i++)
+{
+    var tStr = truncatable[i].innerHTML;
+    truncatable[i].innerHTML = truncate(tStr, 30);
+}
+</script>
+</body>
+</html>

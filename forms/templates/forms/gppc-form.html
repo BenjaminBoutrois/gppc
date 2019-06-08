@@ -14,6 +14,11 @@
         {% csrf_token %}
         <div class="form">
             <div class="form-input">
+                <label for="date">Date de demande (jj-mm-yyyy)</label>
+                    {{ form.date.errors }}
+                    {{ form.date }}
+            </div>
+            <div class="form-input">
                 <label for="name">Nom</label>
                     {{ form.name.errors }}
                     {{ form.name }}
