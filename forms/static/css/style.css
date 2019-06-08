@@ -64,3 +64,14 @@ body {
     margin: 0 auto;
     padding: 5%;
 }
+
+.lien-retour {
+    font-size: x-large;
+    letter-spacing: 0.5 px;
+    margin: 2%;
+}
+
+.lien-retour:hover {
+    color: #bf0f2d;
+    opacity: 0.5;
+}

@@ -14,6 +14,7 @@
 </head>
 <body>
     <h1>Historique du GPPC</h1>
+    <a class="lien-retour" href="{% url 'index' %}">< Retour</a>
 <script>
 $(document).ready(function () {
     $('#table-history').DataTable({
@@ -106,7 +107,7 @@ console.log(truncatable);
 for(var i = 0; i <= truncatable.length -1; i++)
 {
     var tStr = truncatable[i].innerHTML;
-    truncatable[i].innerHTML = truncate(tStr, 30);
+    truncatable[i].innerHTML = truncate(tStr, 35);
 }
 </script>
 </body>
