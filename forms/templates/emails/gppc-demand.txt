@@ -1,0 +1,11 @@
+Le {{ data.date }},
+{{ data.firstname }} {{ data.name }} demande l’impression de son poster {{ data.filename }}
+Avec un commentaire : {{ data.comments }}
+Nom: {{ data.name }}
+Prenom: {{ data.firstname }}
+Courriel: {{ data.email }}
+Poste: {{ data.phone }}
+Batiment: {{ data.building }}
+Bureau: {{ data.office }}
+Date de livraison : {{ data.delivery }}
+Format : {% if data.format == "Other format" %}Custom => {{ data.formatHeight }} x {{ data.formatWidth }} cm{% else %}{{ data.format }}{% endif %}

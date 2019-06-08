@@ -1,0 +1,15 @@
+{{ data.firstname }} {{ data.name }},
+Your poster printing request has been taken into account.
+Votre demande d’impression du poster a bien été pris en compte.
+
+Resume :
+
+Name : {{ data.name }}
+Firstname : {{ data.firstname }}
+Email : {{ data.email }}
+Phone : {{ data.phone }}
+Building : {{ data.building }}
+Office : {{ data.office }}
+Minimum delivery date : {{ data.delivery }}
+Printing format : {% if data.format == "Other format" %}Custom => {{ data.formatHeight }} x {{ data.formatWidth }} cm{% else %}{{ data.format }}{% endif %}
+Comments : {{ data.comments }}

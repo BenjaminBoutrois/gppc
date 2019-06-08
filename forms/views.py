@@ -7,6 +7,8 @@ from forms.models import ContactData
 import datetime
 from django.conf import settings
 import string
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 
 def index(request):
     return render(request, 'forms/index.html')
@@ -15,7 +17,7 @@ def gppc(request):
     if request.POST:
         form = ContactForm(request.POST, request.FILES)
         if form.is_valid():
-            # Ici nous pouvons traiter les données du formulaire
+            # Traitement des données
             rDate = form.cleaned_data['date']
             rName = form.cleaned_data['name']
             rFirstname = form.cleaned_data['firstname']
@@ -51,9 +53,25 @@ def gppc(request):
             
             newData.save()
 
-            # Nous pourrions ici envoyer l'e-mail grâce aux données
-            # que nous venons de récupérer
-            envoi = True
+            # Envoi mail acquittement
+            msg_plain = render_to_string('../templates/emails/gppc-acknowledgement.txt', {'data': newData})
+
+            send_mail(
+                '[GeePs Posters] poster printing request – Demande d’impression poster',
+                msg_plain,
+                'test.django.mailing@gmail.com',
+                [newData.email],
+            )
+
+            # Envoi mail demande CRI
+            msg_plain = render_to_string('../templates/emails/gppc-demand.txt', {'data': newData})
+
+            send_mail(
+                '[GeePs Posters] Demande d’impression poster',
+                msg_plain,
+                'test.django.mailing@gmail.com',
+                ['poster@geeps.centralesupelec.fr'],
+            )
     else:
         form = ContactForm()
 
