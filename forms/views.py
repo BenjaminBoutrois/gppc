@@ -9,6 +9,7 @@ from django.conf import settings
 import string
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
+from django.core.mail.message import EmailMessage
 
 def index(request):
     return render(request, 'forms/index.html')
@@ -66,12 +67,15 @@ def gppc(request):
             # Envoi mail demande CRI
             msg_plain = render_to_string('../templates/emails/gppc-demand.txt', {'data': newData})
 
-            send_mail(
-                '[GeePs Posters] Demande d’impression poster',
-                msg_plain,
-                'test.django.mailing@gmail.com',
-                ['poster@geeps.centralesupelec.fr'],
-            )
+            email = EmailMessage()
+            email.subject = '[GeePs Posters] Demande d’impression poster'
+            email.body = msg_plain
+            email.from_email = 'test.django.mailing@gmail.com'
+            email.to = ['poster@geeps.centralesupelec.fr']
+
+            email.attach_file('uploads/' + newData.filename)
+
+            email.send()
     else:
         form = ContactForm()
 
